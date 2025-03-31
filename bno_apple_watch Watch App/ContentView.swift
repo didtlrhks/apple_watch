@@ -22,6 +22,18 @@ struct ContentView: View {
         Food(name: "청국장", imageName: "chunggukjang"),
         Food(name: "낚지볶음", imageName: "nakzibokum"),
         Food(name: "떡갈비", imageName: "ddukkalbi"),
+        Food(name: "초밥", imageName: "chobab"),
+        Food(name: "토마토스파게티", imageName: "tomatospageti"),
+        Food(name: "주먹밥", imageName: "zumeokbab"),
+        Food(name: "우동", imageName: "udong"),
+        Food(name: "피자", imageName: "pizza"),
+        Food(name: "햄버거", imageName: "hamburger"),
+        Food(name: "김밥", imageName: "gimbab"),
+        
+        
+        
+        
+        
 
         
         
