@@ -8,13 +8,24 @@ struct Food: Identifiable {
 
 struct ContentView: View {
     @State private var foods = [
-        Food(name: "김치찌개", imageName: "bulgogi"),
-        Food(name: "간장게장", imageName: "squid"),
-        Food(name: "비빔밥", imageName: "bulgogi"),
-        Food(name: "간장게장", imageName: "squid"),
-        Food(name: "국수", imageName: "bulgogi"),
-        Food(name: "간장게장", imageName: "squid"),
-        Food(name: "부대찌개", imageName: "bulgogi")
+        Food(name: "탕수육", imageName: "tansuyuk"),
+        Food(name: "간장게장", imageName: "ganjanggejang"),
+        Food(name: "짜장면", imageName: "jjajanmun"),
+        Food(name: "짬뽕", imageName: "jjambbong"),
+        Food(name: "볶음밥", imageName: "bookumbab"),
+        Food(name: "불고기", imageName: "bulgogi"),
+        Food(name: "오징어두루치기", imageName: "squid"),
+        Food(name: "닭볶음탕", imageName: "dakbokum"),
+        Food(name: "쌈밥", imageName: "ssambab"),
+        Food(name: "비빔밥", imageName: "bibimbab"),
+        Food(name: "생선구이", imageName: "sangsunggui"),
+        Food(name: "청국장", imageName: "chunggukjang"),
+        Food(name: "낚지볶음", imageName: "nakzibokum"),
+
+        
+        
+        
+        
     ]
     
     @State private var selectedFood: Food?

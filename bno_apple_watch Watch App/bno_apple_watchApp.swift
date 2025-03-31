@@ -11,7 +11,7 @@ import SwiftUI
 struct bno_apple_watch_Watch_AppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SplashView()
         }
     }
 }
