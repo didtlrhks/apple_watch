@@ -55,9 +55,38 @@
 		8E6886312D9A6C5200F03487 /* bno_apple_watch Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "bno_apple_watch Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		8E6886522D9A7F7100F03487 /* Exceptions for "bno_apple_watch Watch App" folder in "bno_apple_watch" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"fonts/온글잎 박다현체.ttf",
+			);
+			target = 8E68860E2D9A6C4F00F03487 /* bno_apple_watch */;
+		};
+		8E6886532D9A7F7100F03487 /* Exceptions for "bno_apple_watch Watch App" folder in "bno_apple_watch Watch AppTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"fonts/온글잎 박다현체.ttf",
+			);
+			target = 8E6886262D9A6C5200F03487 /* bno_apple_watch Watch AppTests */;
+		};
+		8E6886542D9A7F7100F03487 /* Exceptions for "bno_apple_watch Watch App" folder in "bno_apple_watch Watch AppUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"fonts/온글잎 박다현체.ttf",
+			);
+			target = 8E6886302D9A6C5200F03487 /* bno_apple_watch Watch AppUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		8E6886192D9A6C4F00F03487 /* bno_apple_watch Watch App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				8E6886522D9A7F7100F03487 /* Exceptions for "bno_apple_watch Watch App" folder in "bno_apple_watch" target */,
+				8E6886532D9A7F7100F03487 /* Exceptions for "bno_apple_watch Watch App" folder in "bno_apple_watch Watch AppTests" target */,
+				8E6886542D9A7F7100F03487 /* Exceptions for "bno_apple_watch Watch App" folder in "bno_apple_watch Watch AppUITests" target */,
+			);
 			path = "bno_apple_watch Watch App";
 			sourceTree = "<group>";
 		};
@@ -456,6 +485,7 @@
 				DEVELOPMENT_TEAM = 445K6BA392;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "bno-apple-watch-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = bno_apple_watch;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
@@ -486,6 +516,7 @@
 				DEVELOPMENT_TEAM = 445K6BA392;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "bno-apple-watch-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = bno_apple_watch;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
