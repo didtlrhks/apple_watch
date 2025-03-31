@@ -21,8 +21,8 @@ struct ContentView: View {
         Food(name: "생선구이", imageName: "sangsunggui"),
         Food(name: "청국장", imageName: "chunggukjang"),
         Food(name: "낚지볶음", imageName: "nakzibokum"),
+        Food(name: "떡갈비", imageName: "ddukkalbi"),
 
-        
         
         
         
