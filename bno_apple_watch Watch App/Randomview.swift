@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import WatchKit
 
 
 
@@ -74,55 +75,115 @@ struct Randomview: View {
     
     ]
     
-    @State private var selectedFood: Food?
-    @State private var isSpinning = false
-    @State private var currentIndex = 0
-    @State private var timer: Timer?
-    
+      @State private var selectedFood: Food?
+      @State private var isSpinning = false
+      @State private var currentIndex = 0
+      @State private var timer: Timer?
+      
+      private func getButtonSize() -> CGFloat {
+          let screenWidth = WKInterfaceDevice.current().screenBounds.width
+          if screenWidth <= 180 { // 38mm
+              return 12
+          } else if screenWidth <= 200 { // 40mm
+              return 14
+          } else if screenWidth <= 220 { // 41mm
+              return 16
+          } else { // 44mm, 45mm, 49mm
+              return 18
+          }
+      }
+      
+      private func getImageSize() -> CGFloat {
+          let screenWidth = WKInterfaceDevice.current().screenBounds.width
+          if screenWidth <= 180 { // 38mm
+              return 60
+          } else if screenWidth <= 200 { // 40mm
+              return 70
+          } else if screenWidth <= 220 { // 41mm
+              return 80
+          } else { // 44mm, 45mm, 49mm
+              return 90
+          }
+      }
+      
+      private func getButtonWidth() -> CGFloat {
+          let screenWidth = WKInterfaceDevice.current().screenBounds.width
+          if screenWidth <= 180 { // 38mm
+              return 120//
+          } else if screenWidth <= 200 { // 40mm
+              return 140
+          } else if screenWidth <= 220 { // 41mm
+              return 170 //+40
+          } else { // 44mm, 45mm, 49mm
+              return 145
+          }
+      }
+      
+      private func getButtonHeight() -> CGFloat {
+          let screenWidth = WKInterfaceDevice.current().screenBounds.width
+          if screenWidth <= 180 { // 38mm
+              return 42
+          } else if screenWidth <= 200 { // 40mm
+              return 40
+          } else if screenWidth <= 220 { // 41mm
+              return 45//+4
+          } else { // 44mm, 45mm, 49mm
+              return 44
+          }
+      }
     var body: some View {
-        ZStack {
-            
-            Color(hex: "FDE8BB")
-                .edgesIgnoringSafeArea(.all)
-            
-            VStack(spacing: 10) {
-                Text("오늘의 점심은?")
-                    .font(.custom("NotoSansOriya-Bold", size: 16))
-                    .foregroundColor(.black)
+        GeometryReader { geometry in
+            ZStack {
+                Color(hex: "FDE8BB")
+                    .edgesIgnoringSafeArea(.all)
                 
-                ZStack {
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(Color.gray.opacity(0.0))
-                        .frame(width: 80, height: 80)
+                VStack {
+                    Spacer(minLength: 0) // 상단 여백 조절
                     
-                    Image(foods[currentIndex].imageName)
-                        .imageScale(.large)
-                        .font(.custom("NotoSansOriya-Bold", size: 16))
+                    VStack(spacing: 8) { // spacing 감소
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color.gray.opacity(0.0))
+                                .frame(width: 70, height: 70)
+                            
+                            Image(foods[currentIndex].imageName)
+                                .resizable()
+                                .scaledToFit()
+                                .imageScale(.large)
+                                .font(.custom("NotoSansOriya-Bold", size: 16))
+                        }
+                       
+                    }
+                    
+                    VStack {
+                        if let selectedFood = selectedFood {
+                            Text(selectedFood.name)
+                                .font(.custom("NotoSansOriya-Bold", size: getButtonSize() + 2))
+                                .bold()
+                                .foregroundColor(.black)
+                        } else {
+                            Text("메뉴를 선택해주세요")
+                                .font(.custom("NotoSansOriya-Bold", size: getButtonSize() + 2))
+                                .foregroundColor(.gray)
+                        }
+                        Button(action: {
+                            startSpinning()
+                        }) {
+                            Text("메뉴 선택하기")
+                                .font(.custom("NotoSansOriya-Bold", size: getButtonSize() + 2))
+                                .foregroundColor(.white)
+                                .frame(width: getButtonWidth(), height: getButtonHeight())
+                                .background(Color(hex: "FF6B35"))
+                                .cornerRadius(15)
+                        }
+                        .allowsHitTesting(!isSpinning)
+                    }
+                    .padding(.bottom, 10)
+                    .padding(.horizontal)
+                    
+                    Spacer() // 하단 여백
                 }
-                
-                if let selectedFood = selectedFood {
-                    Text(selectedFood.name)
-                        .font(.headline)
-                        .bold()
-                } else {
-                    Text("메뉴를 선택해주세요")
-                        .font(.custom("NotoSansOriya-Bold", size: 16))
-                        .foregroundColor(.gray)
-                }
-                
-                Button(action: {
-                    startSpinning()
-                }) {
-                    Text("메뉴 선택하기")
-                        .font(.custom("NotoSansOriya-Bold", size: 16))
-                        .foregroundColor(.white)
-                        .frame(width: 180, height: 50)
-                        .background(Color(hex: "FF6B35"))
-                        .cornerRadius(15)
-                }
-                .allowsHitTesting(!isSpinning)
             }
-            .padding(8)
         }
     }
     

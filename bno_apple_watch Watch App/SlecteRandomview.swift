@@ -80,63 +80,52 @@ struct SelecteRandomview: View {
                selectedSubjects.contains(food.subject)
            }
        }
-       
-       var body: some View {
-           ZStack {
-               Color(hex: "FDE8BB")
-                   .edgesIgnoringSafeArea(.all)
-               
-               VStack(spacing: 10) {
-                   Text("오늘의 점심은?")
-                       .font(.custom("NotoSansOriya-Bold", size: 16))
-                       .foregroundColor(.black)
+    var body: some View {
+           NavigationView {
+               ZStack {
+                   Color(hex: "FDE8BB")
+                       .edgesIgnoringSafeArea(.all)
                    
-                   // Subject 선택 버튼들
-                   ScrollView(.horizontal, showsIndicators: false) {
-                       HStack(spacing: 8) {
-                           ForEach(subjects, id: \.self) { subject in
-                               Button(action: {
-                                   toggleSubject(subject)
-                               }) {
-                                   Text(subject)
-                                       .font(.custom("NotoSansOriya-Bold", size: 14))
-                                       .foregroundColor(selectedSubjects.contains(subject) ? .white : .black)
-                                       .padding(.horizontal, 12)
-                                       .padding(.vertical, 6)
-                                       .background(
-                                           selectedSubjects.contains(subject) ?
-                                           Color(hex: "FF6B35") :
-                                           Color.white
-                                       )
-                                       .cornerRadius(15)
+                   VStack(spacing: 10) {
+                       Text("오늘의 점심은?")
+                           .font(.custom("NotoSansOriya-Bold", size: 16))
+                           .foregroundColor(.black)
+                       
+                       ScrollView(.horizontal, showsIndicators: false) {
+                           HStack(spacing: 8) {
+                               ForEach(subjects, id: \.self) { subject in
+                                   Button(action: {
+                                       toggleSubject(subject)
+                                   }) {
+                                       Text(subject)
+                                           .font(.custom("NotoSansOriya-Bold", size: 14))
+                                           .foregroundColor(selectedSubjects.contains(subject) ? .white : .black)
+                                           .padding(.horizontal, 12)
+                                           .padding(.vertical, 6)
+                                           .background(
+                                               selectedSubjects.contains(subject) ?
+                                               Color(hex: "FF6B35") :
+                                               Color.white
+                                           )
+                                           .cornerRadius(15)
+                                   }
                                }
                            }
+                           .padding(.horizontal)
                        }
-                       .padding(.horizontal)
-                   }
-                   
-                   
-                   
-                  
-                   
-                   Button(action: {
-                       if !selectedSubjects.isEmpty {
-                           showRouletteView = true
+                       
+                       NavigationLink(destination: RouletteView(foods: filteredFoods, subject: Array(selectedSubjects))) {
+                           Text("다음")
+                               .font(.custom("NotoSansOriya-Bold", size: 16))
+                               .foregroundColor(.white)
+                               .frame(width: 130, height: 50)
+                               .background(Color(hex: "FF6B35"))
+                               .cornerRadius(15)
                        }
-                   }) {
-                       Text("다음")
-                           .font(.custom("NotoSansOriya-Bold", size: 16))
-                           .foregroundColor(.white)
-                           .frame(width: 180, height: 50)
-                           .background(Color(hex: "FF6B35"))
-                           .cornerRadius(15)
+                       .disabled(selectedSubjects.isEmpty)
                    }
-                   .disabled(selectedSubjects.isEmpty)
+                   .padding(.horizontal)
                }
-               .padding(8)
-           }
-           .sheet(isPresented: $showRouletteView) {
-               RouletteView(foods: filteredFoods, subject: Array(selectedSubjects))
            }
        }
        
