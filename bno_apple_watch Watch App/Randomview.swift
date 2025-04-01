@@ -51,6 +51,16 @@ struct Randomview: View {
         Food(name: "된장찌개", imageName: "danzzigae"),
         Food(name: "크림파스타", imageName: "krimpasta"),
         Food(name: "순댓국", imageName: "sundaeguk"),
+        Food(name: "부대찌개", imageName: "budaezigae"),
+        Food(name: "갈비탕", imageName: "galbitang"),
+        Food(name: "삼계탕", imageName: "samgaetang"),
+        Food(name: "라멘", imageName: "ramen_japan"),
+        Food(name: "덮밥", imageName: "dupbbap"),
+        Food(name: "메밀소바", imageName: "maemilsoba"),
+        Food(name: "돈가츠", imageName: "dongase"),
+        Food(name: "리조또", imageName: "rezoto"),
+        Food(name: "월남쌈", imageName: "wolnamssam"),
+        Food(name: "김치찌개", imageName: "gimchizzigae"),
         
     
     ]
