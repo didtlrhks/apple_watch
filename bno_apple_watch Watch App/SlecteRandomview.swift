@@ -1,16 +1,7 @@
-//
-//  randomview.swift
-//  bno_apple_watch Watch App
-//
-//  Created by 양시관 on 4/1/25.
-//
-
 import Foundation
 import SwiftUI
 
-
-
-struct Randomview: View {
+struct SelecteRandomview: View {
     @State private var foods = [
         Food(name: "탕수육", imageName: "tansuyuk", subject: "중식"),
         Food(name: "간장게장", imageName: "ganjanggejang",subject: "한식"),
@@ -33,7 +24,7 @@ struct Randomview: View {
         Food(name: "피자", imageName: "pizza",subject: "양식"),
         Food(name: "햄버거", imageName: "hamburger",subject: "양식"),
         Food(name: "김밥", imageName: "gimbab",subject: "간편식"),
-        Food(name: "편의점 도시락", imageName: "dosirak",subject: "간식"),
+        Food(name: "편의점 도시락", imageName: "dosirak",subject: "간편식"),
         Food(name: "샌드위치", imageName: "sandwich",subject: "간편식"),
         Food(name: "토스트", imageName: "toast",subject: "간편식"),
         Food(name: "쌀국수", imageName: "ssalguksu",subject: "기타"),
@@ -67,89 +58,96 @@ struct Randomview: View {
         Food(name: "부리또", imageName: "buritto",subject: "기타"),
         Food(name: "보쌈", imageName: "bossam",subject: "한식"),
         Food(name: "잔치국수", imageName: "janchiguksu",subject: "한식"),
-        Food(name: "제육", imageName: "jeyuok",subject: "한식"),
-        
-        
-        
-    
+        Food(name: "제육", imageName: "jeyuok",subject: "한식")
     ]
     
-    @State private var selectedFood: Food?
-    @State private var isSpinning = false
-    @State private var currentIndex = 0
-    @State private var timer: Timer?
     
-    var body: some View {
-        ZStack {
-            
-            Color(hex: "FDE8BB")
-                .edgesIgnoringSafeArea(.all)
-            
-            VStack(spacing: 10) {
-                Text("오늘의 점심은?")
-                    .font(.custom("NotoSansOriya-Bold", size: 16))
-                    .foregroundColor(.black)
-                
-                ZStack {
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(Color.gray.opacity(0.0))
-                        .frame(width: 80, height: 80)
-                    
-                    Image(foods[currentIndex].imageName)
-                        .imageScale(.large)
-                        .font(.custom("NotoSansOriya-Bold", size: 16))
-                }
-                
-                if let selectedFood = selectedFood {
-                    Text(selectedFood.name)
-                        .font(.headline)
-                        .bold()
-                } else {
-                    Text("메뉴를 선택해주세요")
-                        .font(.custom("NotoSansOriya-Bold", size: 16))
-                        .foregroundColor(.gray)
-                }
-                
-                Button(action: {
-                    startSpinning()
-                }) {
-                    Text("메뉴 선택하기")
-                        .font(.custom("NotoSansOriya-Bold", size: 16))
-                        .foregroundColor(.white)
-                        .frame(width: 180, height: 50)
-                        .background(Color(hex: "FF6B35"))
-                        .cornerRadius(15)
-                }
-                .allowsHitTesting(!isSpinning)
-            }
-            .padding(8)
-        }
-    }
-    
-    private func startSpinning() {
-        isSpinning = true
-        selectedFood = nil
-        
-        timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-            currentIndex = (currentIndex + 1) % foods.count
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            timer?.invalidate()
-            timer = nil
-            
-            let randomIndex = Int.random(in: 0..<foods.count)
-            selectedFood = foods[randomIndex]
-            currentIndex = randomIndex
-            
-            isSpinning = false
-        }
-    }
-}
-
-
-
-
+   
+    @State private var selectedSubjects: Set<String> = []
+       @State private var showRouletteView = false
+       
+       private var subjects: [String] {
+           let uniqueSubjects = Set(foods.map { $0.subject })
+           return Array(uniqueSubjects).sorted()
+       }
+       
+       private var filteredFoods: [Food] {
+           if selectedSubjects.isEmpty {
+               return []
+           }
+           
+           return foods.filter { food in
+               selectedSubjects.contains(food.subject)
+           }
+       }
+       
+       var body: some View {
+           ZStack {
+               Color(hex: "FDE8BB")
+                   .edgesIgnoringSafeArea(.all)
+               
+               VStack(spacing: 10) {
+                   Text("오늘의 점심은?")
+                       .font(.custom("NotoSansOriya-Bold", size: 16))
+                       .foregroundColor(.black)
+                   
+                   // Subject 선택 버튼들
+                   ScrollView(.horizontal, showsIndicators: false) {
+                       HStack(spacing: 8) {
+                           ForEach(subjects, id: \.self) { subject in
+                               Button(action: {
+                                   toggleSubject(subject)
+                               }) {
+                                   Text(subject)
+                                       .font(.custom("NotoSansOriya-Bold", size: 14))
+                                       .foregroundColor(selectedSubjects.contains(subject) ? .white : .black)
+                                       .padding(.horizontal, 12)
+                                       .padding(.vertical, 6)
+                                       .background(
+                                           selectedSubjects.contains(subject) ?
+                                           Color(hex: "FF6B35") :
+                                           Color.white
+                                       )
+                                       .cornerRadius(15)
+                               }
+                           }
+                       }
+                       .padding(.horizontal)
+                   }
+                   
+                   
+                   
+                  
+                   
+                   Button(action: {
+                       if !selectedSubjects.isEmpty {
+                           showRouletteView = true
+                       }
+                   }) {
+                       Text("다음")
+                           .font(.custom("NotoSansOriya-Bold", size: 16))
+                           .foregroundColor(.white)
+                           .frame(width: 180, height: 50)
+                           .background(Color(hex: "FF6B35"))
+                           .cornerRadius(15)
+                   }
+                   .disabled(selectedSubjects.isEmpty)
+               }
+               .padding(8)
+           }
+           .sheet(isPresented: $showRouletteView) {
+               RouletteView(foods: filteredFoods, subject: Array(selectedSubjects))
+           }
+       }
+       
+       private func toggleSubject(_ subject: String) {
+           if selectedSubjects.contains(subject) {
+               selectedSubjects.remove(subject)
+           } else {
+               selectedSubjects.insert(subject)
+           }
+       }
+   }
 #Preview {
-    Randomview()
+    SelecteRandomview()
 }

@@ -22,9 +22,8 @@ struct ContentView: View {
                 
                 Divider()
                 
-                Button(action: {
-                    
-                }) {
+                NavigationLink(destination:SelecteRandomview())
+                {
                     Text("선택 음식 랜덤돌리기")
                         .font(.custom("NotoSansOriya-Bold", size: 16))
                         .fontWeight(.semibold)
@@ -44,11 +43,7 @@ struct WatchButtonStyle: ButtonStyle {
         configuration.label
             .background(
                 Color(hex: "FDE8BB")
-                    
-                
             )
-            
-         
     }
 }
 
