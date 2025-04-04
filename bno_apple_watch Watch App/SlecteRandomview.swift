@@ -58,7 +58,24 @@ struct SelecteRandomview: View {
         Food(name: "부리또", imageName: "buritto",subject: "기타"),
         Food(name: "보쌈", imageName: "bossam",subject: "한식"),
         Food(name: "잔치국수", imageName: "janchiguksu",subject: "한식"),
-        Food(name: "제육", imageName: "jeyuok",subject: "한식")
+        Food(name: "제육", imageName: "jeyuok",subject: "한식"),
+        Food(name: "마라탕", imageName: "maratang", subject: "중식"),
+        Food(name: "차돌숙주볶음", imageName: "chadolsukju", subject: "한식"),
+        Food(name: "치킨", imageName: "chicken", subject: "양식"),
+        Food(name: "훠궈", imageName: "hugua", subject: "중식"),
+        Food(name: "닭발", imageName: "darkbal", subject: "한식"),
+        Food(name: "텐동", imageName: "tendong", subject: "일식"),
+        Food(name: "족발", imageName: "jokbal", subject: "한식"),
+        Food(name: "폭립", imageName: "pokrip", subject: "양식"),
+        Food(name: "생선회", imageName: "sasimi", subject: "일식"),
+        Food(name: "육회", imageName: "youkhei", subject: "한식"),
+        Food(name: "회덮밥", imageName: "hiedubbab", subject: "한식"),
+        Food(name: "샤브샤브", imageName: "shabeshabe", subject: "중식"),
+        Food(name: "삼겹살", imageName: "samgubsal", subject: "한식"),
+        Food(name: "스테이크", imageName: "stake", subject: "양식"),
+        Food(name: "육회덮밥", imageName: "youkhaedubbab", subject: "한식"),
+        
+        
     ]
     
     
